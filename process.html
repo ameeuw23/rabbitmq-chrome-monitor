@@ -1,0 +1,31 @@
+<html>
+  <script>
+    
+    function check() {
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", localStorage["target"] + "/api/overview", true, localStorage["user"], localStorage["password"]);
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4) {
+          // JSON.parse does not evaluate the attacker's scripts.
+          var resp = JSON.parse(xhr.responseText);
+          if (resp.queue_totals.messages > 0) {
+            chrome.browserAction.setBadgeText({text: "Q!!"});
+            chrome.browserAction.setBadgeBackgroundColor({color: [255, 0, 0, 255]})
+            chrome.browserAction.setIcon({path: "icon_alarm.png"});
+          } else {
+            chrome.browserAction.setBadgeText({text: "OK"});
+            chrome.browserAction.setBadgeBackgroundColor({color: [0, 128, 0, 255]})
+            chrome.browserAction.setIcon({path: "icon.png"});
+          }
+        }
+      }
+
+      xhr.send();
+
+      return false;
+    }
+
+    check(); // Initial check.
+    setInterval("check()", localStorage["interval"]);
+  </script>
+</html>

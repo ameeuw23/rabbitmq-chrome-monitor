@@ -1,0 +1,44 @@
+<html>
+<head><title>RabbitMQ queue monitor: Settings</title></head>
+<script type="text/javascript">
+
+// Saves options to localStorage.
+function save_options() {
+  localStorage["target"] = document.getElementById("o_target").value;
+  localStorage["interval"] = parseInt(document.getElementById("o_interval").value)*1000;
+  localStorage["user"] = document.getElementById("o_user").value;
+  localStorage["password"] = document.getElementById("o_password").value;
+
+  // Update status to let user know options were saved.
+  var status = document.getElementById("status");
+  status.innerHTML = "Options Saved.";
+  setTimeout(function() {
+    status.innerHTML = "";
+  }, 750);
+}
+
+</script>
+
+<body>
+
+RabbitMQ host: (example: http://example.org:55672)
+<input type="text" id="o_target" />
+<br />
+
+Check interval: (seconds)
+<input type="text" id="o_interval" />
+<br />
+
+Username: (optional)
+<input type="text" id="o_user" />
+<br />
+
+Password: (optional)
+<input type="text" id="o_password" />
+<br />
+
+
+<br>
+<button onclick="save_options()">Save</button>
+</body>
+</html>

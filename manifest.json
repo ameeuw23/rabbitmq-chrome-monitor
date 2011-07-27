@@ -1,0 +1,12 @@
+{
+  "name": "RabbitMQ queue monitor",
+  "version": "0.1",
+  "description": "Warns you if messages start to queue up in your RabbitMQ AMQP broker.",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "background_page": "process.html",
+  "options_page": "settings.html",
+  "permissions": [ "http://*/api/*" ]
+}
